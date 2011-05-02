@@ -1,0 +1,27 @@
+<p>Leave a comment</p>
+<%= form_for [model,comment] do |f| %>
+  <% if model.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(model.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul>
+      <% model.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% if comment.parent %>
+    <%= f.hidden_field :parent, :value => comment.parent %>
+  <% end %>
+  <div class="field">
+    <%= f.label :author %><br />
+    <%= f.text_field :author %>
+  </div>
+   <div class="field">
+    <%= f.label :text %><br />
+    <%= f.text_area :text %>
+  </div>
+<div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

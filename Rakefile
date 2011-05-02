@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 require 'rubygems'
 require 'bundler'
 begin
@@ -13,15 +11,13 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "mongoid_commentable"
   gem.homepage = "http://github.com/mgolovnia/mongoid_commentable"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Comments for Mongoid documents}
+  gem.description = %Q{Mongoid_commentable provides methods to create commentable documents}
   gem.email = "mgolovnia@gmail.com"
   gem.authors = ["Max Golovnia"]
-  # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
 

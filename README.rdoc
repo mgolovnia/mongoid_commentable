@@ -1,6 +1,57 @@
 = mongoid_commentable
 
-Description goes here.
+Mongoid_commentable provides methods to create commentable documents
+
+== Installation
+You can use latest gem:
+  gem install mongoid_commentable
+
+or in Gemfile:
+  gem 'mongoid_commentable'
+
+== Usage
+To make model commentable you need to include Mongoid::Commentable into your document:
+  class Article
+    include Mongoid::Document
+    include Mongoid::Commentable
+    
+    field author
+    field content
+  end
+
+Then you need to set up a nested resource in your routes.rb:
+  resources :articles do
+    resources :comments
+  end
+
+And in your view file:
+  <%= link_to "Leave a comment", new_article_comment_path(:article_id => @article.id.to_s) %>
+
+For a reply link add parent comment id:
+  <%= link_to "Reply", new_article_comment_path(:article_id => @article.id.to_s, :parent => comment.id.to_s) %>
+
+If you want to make a custom views for a comments, run:
+  rails g mongoid_commentable:views
+
+To get a list of all comments, use following method:
+  @article.comments_list
+it will return comments in ascending order. To get comments in descending order use:
+  @article.comments_list(:sort => :desc)
+NOTE: For descending ordered comments you need to add index to your model manually:
+  index [['comments', MONGO::DESCENDING]]
+
+To get branch for a comment, use following method:
+  @article.branch_for(parent_comment_id)
+it will return whole branch with all childrens for a certain comment
+
+To get comment level, use following method: 
+  comment.level
+
+To mark comment as deleted, use following method:
+  @article.mark_comment_deleted(comment_id)
+
+To get comments count, use:
+  @article.comments_count
 
 == Contributing to mongoid_commentable
  
