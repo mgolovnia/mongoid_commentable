@@ -1,4 +1,6 @@
 *.swp
+.document
+.rspec
 # rcov generated
 coverage
 

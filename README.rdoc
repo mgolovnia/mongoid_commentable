@@ -35,6 +35,11 @@ If you want to make a custom views for a comments, run:
 
 To get a list of all comments, use following method:
   @article.comments_list
+Example: 
+  <% @article.comments_list.each |comment| do %>
+    <p> <%= comment.author %> </p>
+    <p> <%= comment.text %> </p> 
+  <% end %>
 it will return comments in ascending order. To get comments in descending order use:
   @article.comments_list(:sort => :desc)
 NOTE: For descending ordered comments you need to add index to your model manually:
