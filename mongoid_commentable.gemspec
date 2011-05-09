@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Max Golovnia"]
+  s.authors = [%q{Max Golovnia}]
   s.date = %q{2011-05-09}
   s.description = %q{Mongoid_commentable provides methods to create commentable documents}
   s.email = %q{mgolovnia@gmail.com}
@@ -41,9 +41,9 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/mgolovnia/mongoid_commentable}
-  s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.licenses = [%q{MIT}]
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.1}
   s.summary = %q{Comments for Mongoid documents}
 
   if s.respond_to? :specification_version then
