@@ -26,6 +26,7 @@ GEM
       will_paginate (~> 3.0.pre)
     rake (0.8.7)
     rcov (0.9.9)
+    rr (1.0.2)
     rspec (2.3.0)
       rspec-core (~> 2.3.0)
       rspec-expectations (~> 2.3.0)
@@ -47,4 +48,5 @@ DEPENDENCIES
   jeweler (~> 1.6.0)
   mongoid (~> 2.0)
   rcov
+  rr
   rspec (~> 2.3.0)

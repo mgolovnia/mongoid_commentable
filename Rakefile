@@ -18,6 +18,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{Mongoid_commentable provides methods to create commentable documents}
   gem.email = "mgolovnia@gmail.com"
   gem.authors = ["Max Golovnia"]
+  gem.version = File.read('VERSION').chomp
 end
 Jeweler::RubygemsDotOrgTasks.new
 

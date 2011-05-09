@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Golovnia"]
-  s.date = %q{2011-05-02}
+  s.date = %q{2011-05-09}
   s.description = %q{Mongoid_commentable provides methods to create commentable documents}
   s.email = %q{mgolovnia@gmail.com}
   s.extra_rdoc_files = [
@@ -17,8 +17,6 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    ".document",
-    ".rspec",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -26,15 +24,19 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "app/controllers/comments_controller.rb",
-    "app/models/comment.rb",
-    "app/views/comments/_form.html.erb",
-    "app/views/comments/edit.html.erb",
-    "app/views/comments/index.html.erb",
-    "app/views/comments/new.html.erb",
-    "app/views/comments/show.html.erb",
-    "lib/generators/mongoid_commentable/views_generator.rb",
+    "lib/comment.rb",
+    "lib/generators/mongoid_commentable/install_generator.rb",
+    "lib/generators/templates/models/comment.rb",
+    "lib/generators/templates/views/comments/_form.html.erb",
+    "lib/generators/templates/views/comments/edit.html.erb",
+    "lib/generators/templates/views/comments/index.html.erb",
+    "lib/generators/templates/views/comments/new.html.erb",
+    "lib/generators/templates/views/comments/show.html.erb",
     "lib/mongoid/commentable.rb",
     "lib/mongoid_commentable.rb",
+    "mongoid_commentable.gemspec",
+    "spec/models/comment.rb",
+    "spec/models/commentable_model.rb",
     "spec/mongoid/commentable_spec.rb",
     "spec/spec_helper.rb"
   ]
@@ -50,6 +52,7 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<mongoid>, ["~> 2.0"])
       s.add_runtime_dependency(%q<bson_ext>, ["~> 1.3"])
+      s.add_development_dependency(%q<rr>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -58,6 +61,7 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<mongoid>, ["~> 2.0"])
       s.add_dependency(%q<bson_ext>, ["~> 1.3"])
+      s.add_dependency(%q<rr>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.3.0"])
       s.add_dependency(%q<database_cleaner>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
@@ -67,6 +71,7 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<mongoid>, ["~> 2.0"])
     s.add_dependency(%q<bson_ext>, ["~> 1.3"])
+    s.add_dependency(%q<rr>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.3.0"])
     s.add_dependency(%q<database_cleaner>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])

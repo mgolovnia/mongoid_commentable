@@ -1,53 +1,48 @@
 require 'spec_helper'
-class TestModel
-  include Mongoid::Document
-  include Mongoid::Commentable
-end
-describe 'Make commentable' do
+
+describe Mongoid::Commentable do
   
-   let(:test_model){TestModel.create!}
-  
+  describe Comment do
+   
+    context 'creating new comment' do 
+      subject {CommentableModel.new.create_comment!(:author => 'Author', :text => 'test') }
+      its(:class){should == Comment} 
+      its(:author){should == 'Author'} 
+      its(:text){should == 'test'}
+      specify{subject.path.should == "root.#{subject.id}"}
+   end
 
-  it 'should be commentable' do
-    test_model.class.commentable?.should == true
+    context 'replying to a comment' do
+      before do
+        @commentable_model = CommentableModel.new  
+        3.times{|i| @commentable_model.create_comment!(nil)}
+        @parent = @commentable_model.comments.first
+      end
+
+      subject{@child = @commentable_model.create_comment!(:parent => @parent.id.to_s)}
+      specify{subject.path.should == "root.#{@parent.id}.#{subject.id}"}
+    end
+
+    context 'marking comment as deleted' do
+      before do
+        @comment = CommentableModel.new.create_comment!(nil)
+        @comment.remove 
+      end
+      subject {@comment}
+      its(:deleted_at){should_not be_nil}
+      its(:deleted?){should be_true}
+    end
+
+    context 'getting branch' do
+      before do
+        @commentable_model = CommentableModel.new  
+        @comment1 = @commentable_model.create_comment!(nil)
+        @comment2 = @commentable_model.create_comment!(nil)
+        @child1 = @commentable_model.create_comment!(:parent => @comment1.id.to_s)
+        @child2 = @commentable_model.create_comment!(:parent => @child1.id.to_s)
+      end
+      subject{@commentable_model}
+      specify{subject.branch_for(@comment1.id).should == [@comment1,@child1,@child2]}
+    end
   end
-
-  it 'should allow to add a comment' do
-    comment = test_model.create_comment!(:author => 'Test author', :text => 'Hello, World!')
-    comment.author.should == 'Test author'
-    comment.text.should == 'Hello, World!'
-    comment.path.should == "root.#{comment.id.to_s}"
-    comment.deleted.should == false
-    test_model.comments_count == 1
-  end
-
-  it 'should allow to add a reply to a comment' do
-    comment = test_model.create_comment!(:author => 'Author', :text => 'Parent')
-    reply = test_model.create_comment!(:author => 'Author2', :text => 'Reply', :parent => comment.id.to_s)
-    test_model.comments.find(reply.id).path.should == "#{comment.path}.#{reply.id.to_s}"
-  end
-
-  it 'should mark comment as deleted' do
-    comment = test_model.create_comment!(:author => 'Author', :text => 'Parent')
-    test_model.comments_count == 1
-    test_model.mark_comment_deleted(comment.id)
-    test_model.comments.find(comment.id).deleted.should == true
-    test_model.comments_count == 0
-  end
-
-  it 'should return a branch of comments' do
-    parent1 = test_model.create_comment!(:author => 'Test author', :text => 'Parent1')
-    child1 = test_model.create_comment!(:author => 'Test author', :text => 'Child1', :parent => parent1.id.to_s)
-    child2 = test_model.create_comment!(:author => 'Test author', :text => 'Parent1', :parent => child1.id.to_s)
-    parent2 = test_model.create_comment!(:author => 'Test author', :text => 'Parent2')
-    branch = test_model.branch_for(parent1.id)
-    branch.should == [parent1,child1,child2]
-  end
-
-  it 'should return wrong argument error' do
-    expect{test_model.comments_list(:wrong_argument)}.to raise_error ArgumentError
-  end
-
-
-
 end

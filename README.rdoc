@@ -9,6 +9,9 @@ You can use latest gem:
 or in Gemfile:
   gem 'mongoid_commentable'
 
+Then install required model and views:
+  rails generate mongoid_commentable:install
+
 == Usage
 To make model commentable you need to include Mongoid::Commentable into your document:
   class Article
@@ -30,13 +33,10 @@ And in your view file:
 For a reply link add parent comment id:
   <%= link_to "Reply", new_article_comment_path(:article_id => @article.id.to_s, :parent => comment.id.to_s) %>
 
-If you want to make a custom views for a comments, run:
-  rails g mongoid_commentable:views
-
 To get a list of all comments, use following method:
   @article.comments_list
 Example: 
-  <% @article.comments_list.each |comment| do %>
+  <% @article.comments_list.each do |comment| %>
     <p> <%= comment.author %> </p>
     <p> <%= comment.text %> </p> 
   <% end %>
@@ -53,10 +53,10 @@ To get comment level, use following method:
   comment.level
 
 To mark comment as deleted, use following method:
-  @article.mark_comment_deleted(comment_id)
+  @article.comments.find(comment_id).remove
 
-To get comments count, use:
-  @article.comments_count
+To restore comment, use method restore:
+  @article.comments.find(comment_id).restore
 
 == Contributing to mongoid_commentable
  
