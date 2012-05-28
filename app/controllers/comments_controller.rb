@@ -42,7 +42,7 @@ class CommentsController < ActionController::Base
   end
 
   def destroy
-    @model.mark_deleted(params[:comment])
+    @model.remove(params[:comment])
     respond_with(@model)
   end
 
