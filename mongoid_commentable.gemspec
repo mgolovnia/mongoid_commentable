@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mongoid_commentable"
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Golovnia"]
-  s.date = "2012-05-28"
+  s.date = "2012-09-21"
   s.description = "Mongoid_commentable provides methods to create commentable documents"
   s.email = "mgolovnia@gmail.com"
   s.extra_rdoc_files = [
