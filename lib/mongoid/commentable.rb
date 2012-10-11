@@ -2,7 +2,11 @@ module Mongoid::Commentable
   extend ActiveSupport::Concern
   included do |base|
     base.embeds_many :comments, :as => :commentable
-    base.index [['comments', Mongo::ASCENDING]]
+    if  Gem::Version.new(Mongoid::VERSION) < Gem::Version.new('3.0.0')
+      base.index [['comments', Mongo::ASCENDING]]
+    else
+      base.index comments: 1
+    end
   end
     
   module ClassMethods
