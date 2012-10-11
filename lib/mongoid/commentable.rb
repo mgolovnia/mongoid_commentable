@@ -5,7 +5,7 @@ module Mongoid::Commentable
     if  Gem::Version.new(Mongoid::VERSION) < Gem::Version.new('3.0.0')
       base.index [['comments', Mongo::ASCENDING]]
     else
-      base.index comments: 1
+      base.index 'comments' => 1
     end
   end
     
