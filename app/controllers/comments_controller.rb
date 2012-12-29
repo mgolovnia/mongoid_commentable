@@ -1,7 +1,7 @@
 class CommentsController < ActionController::Base
   
   prepend_before_filter :get_model
-  before_filter :get_comment, :only => [:show, :edit, :update]
+  before_filter :get_comment, :only => [:show, :edit, :update, :destroy]
 
   respond_to :html
   
@@ -42,7 +42,7 @@ class CommentsController < ActionController::Base
   end
 
   def destroy
-    @model.comments.find(params[:id]).destroy
+    @comment.destroy
     respond_with(@model)
   end
 
