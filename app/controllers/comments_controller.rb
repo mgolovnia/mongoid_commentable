@@ -51,7 +51,7 @@ class CommentsController < ActionController::Base
   def get_model
     @model = params.each do |name, value|
       if name =~ /(.+)_id$/
-        return $1.classify.camelize.find(value)
+        break $1.classify.camelize.find(value)
       end
     end
   end
