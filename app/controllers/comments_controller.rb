@@ -42,7 +42,7 @@ class CommentsController < ActionController::Base
   end
 
   def destroy
-    @model.remove(params[:comment])
+    @model.comments.find(params[:id]).destroy
     respond_with(@model)
   end
 
