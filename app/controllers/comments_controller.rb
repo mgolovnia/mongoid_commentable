@@ -47,26 +47,13 @@ class CommentsController < ActionController::Base
   end
 
   private
-  
-  def classname
-     params.each do |name, value|
-      if name =~ /(.+)_id$/
-        return $1.classify.constantize
-      end
-    end
-  end
-
-  def model_id
-    params.each do |name, value|
-      if name =~ /.+_id$/
-        return name
-      end
-    end  
-    nil
-  end
 
   def get_model
-    @model = classname.find(params[model_id.to_sym])
+    @model = params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return $1.classify.constantize.find(value)
+      end
+    end
   end
   
   def get_comment
