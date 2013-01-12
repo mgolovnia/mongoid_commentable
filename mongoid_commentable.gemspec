@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "mongoid_commentable"
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Max Golovnia"]
-  s.date = "2012-09-21"
+  s.date = "2013-01-12"
   s.description = "Mongoid_commentable provides methods to create commentable documents"
   s.email = "mgolovnia@gmail.com"
   s.extra_rdoc_files = [
@@ -43,7 +43,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/mgolovnia/mongoid_commentable"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.17"
+  s.rubygems_version = "1.8.24"
   s.summary = "Comments for Mongoid documents"
 
   if s.respond_to? :specification_version then
