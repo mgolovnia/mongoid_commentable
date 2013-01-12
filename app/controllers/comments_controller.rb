@@ -1,7 +1,7 @@
 class CommentsController < ActionController::Base
   
   prepend_before_filter :get_model
-  before_filter :get_comment, :only => [:show, :edit, :update]
+  before_filter :get_comment, :only => [:show, :edit, :update, :destroy]
 
   respond_to :html
   
@@ -42,31 +42,18 @@ class CommentsController < ActionController::Base
   end
 
   def destroy
-    @model.remove(params[:comment])
+    @comment.destroy
     respond_with(@model)
   end
 
   private
-  
-  def classname
-     params.each do |name, value|
-      if name =~ /(.+)_id$/
-        return $1.classify.constantize
-      end
-    end
-  end
-
-  def model_id
-    params.each do |name, value|
-      if name =~ /.+_id$/
-        return name
-      end
-    end  
-    nil
-  end
 
   def get_model
-    @model = classname.find(params[model_id.to_sym])
+    @model = params.each do |name, value|
+      if name =~ /(.+)_id$/
+        break $1.classify.camelize.find(value)
+      end
+    end
   end
   
   def get_comment
