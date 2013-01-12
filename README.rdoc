@@ -18,8 +18,8 @@ To make model commentable you need to include Mongoid::Commentable into your doc
     include Mongoid::Document
     include Mongoid::Commentable
     
-    field author
-    field content
+    field :author
+    field :content
   end
 
 Then you need to set up a nested resource in your routes.rb:
